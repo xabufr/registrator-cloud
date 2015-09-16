@@ -1,7 +1,10 @@
 #!/bin/sh
 
 BASE=$(dirname $0)
-BACKEND=$BASE/backends/$1
+BACKEND_NAME=$1
+BACKEND=$BASE/backends/$BACKEND_NAME
 
-[ -f $BACKEND ] && exec $BACKEND ${@:2}
-[ ! -f $BACKEND ] && echo "Backend $1 does not exists" && exit 2
+shift;
+
+[ -f $BACKEND ] && exec $BACKEND $@
+[ ! -f $BACKEND ] && echo "Backend $BACKEND_NAME does not exists" && exit 2
